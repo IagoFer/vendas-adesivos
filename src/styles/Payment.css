@@ -1,0 +1,96 @@
+.payment-section {
+    width: 100%;
+    max-width: 1200px;
+    padding: 2rem;
+    background-color: #0d0d0d;
+    color: #ffffff;
+    margin: auto;
+  }
+  
+  .payment-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #00e5ff;
+    margin-bottom: 2rem;
+  }
+  
+  .payment-summary {
+    margin-bottom: 2rem;
+  }
+  
+  .payment-summary h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .payment-summary-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .payment-summary-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+  }
+  
+  .payment-total {
+    font-size: 1.5rem;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .payment-methods {
+    margin-bottom: 2rem;
+  }
+  
+  .payment-methods h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .payment-methods label {
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  
+  .payment-shipping {
+    margin-bottom: 2rem;
+  }
+  
+  .payment-shipping h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .payment-shipping label {
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  
+  .payment-buttons {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .payment-button,
+  .payment-back-button {
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .payment-button {
+    background-color: #00e5ff;
+    color: #ffffff;
+  }
+  
+  .payment-back-button {
+    background-color: #333333;
+    color: #ffffff;
+  }
+  

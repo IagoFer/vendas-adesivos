@@ -1,48 +1,61 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "./components/Navbar";
 import HeroSection from "./components/HeroSection";
 import ProductsSection from "./components/ProductsSection";
-import Cart from "./components/Cart";
 import Footer from "./components/Footer";
+import Register from './components/Register';
+import Login from './components/Login';
+import Cart from './components/Cart';
+import Payment from './components/Payment';
+import axios from "axios";
 import "./styles/App.css";
+import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
+import { CartProvider } from './context/CartContext';
+import { AuthProvider } from './context/AuthContext'; // Adicione a importação do AuthProvider
 
-const products = [
-  {
-    name: "Adesivo Futurista",
-    description: "Um adesivo incrível para seu carro.",
-    price: 19.99,
-    image: "https://www.phif.com.br/moleskines/imagens/adesivo-personalizado-para-carros-melhor-preco.jpg"
-  },
-  {
-    name: "Capa de Volante",
-    description: "Uma capa de volante com design moderno.",
-    price: 29.99,
-    image: "https://m.media-amazon.com/images/I/71tm3LzZiZL._AC_UF1000,1000_QL80_.jpg"
-  },
-  {
-    name: "Luz de Neon",
-    description: "Luzes de neon para dar um toque especial ao seu carro.",
-    price: 49.99,
-    image: "https://http2.mlstatic.com/D_NQ_NP_984044-MLB69415832724_052023-O.webp"
-  },
-  {
-    name: "Porta Copos",
-    description: "Porta copos com design ergonômico.",
-    price: 9.99,
-    image: "https://www.importsnautica.com.br/lojas/image/cache/catalog/LiAnun/81w-cLBpenL._SL1500_-800x800.jpg"
-  }
-];
+const ConditionalHeroSection = () => {
+  const location = useLocation();
+  return location.pathname === '/' ? <HeroSection /> : null;
+};
 
 function App() {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/products");
+        setProducts(response.data);
+      } catch (error) {
+        console.error("Erro ao buscar produtos:", error);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
   return (
-    <div className="App">
-      <Navbar />
-      <HeroSection />
-      <main className="main-content">
-        <ProductsSection products={products} />
-      </main>
-      <Footer />
-    </div>
+    <Router>
+      <AuthProvider> {/* Envolva o CartProvider e outros componentes com o AuthProvider */}
+        <CartProvider>
+          <div className="App">
+            <Navbar />
+            <ConditionalHeroSection />
+            <main className="main-content">
+              <Routes>
+                <Route path="/register" element={<Register />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/" element={<ProductsSection products={products} />} />
+                <Route path="/cart" element={<Cart />} />
+                <Route path="/payment" element={<Payment />} />
+                {/* Adicione outras rotas conforme necessário */}
+              </Routes>
+            </main>
+            <Footer />
+          </div>
+        </CartProvider>
+      </AuthProvider>
+    </Router>
   );
 }
 

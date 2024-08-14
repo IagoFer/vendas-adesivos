@@ -1,8 +1,11 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { useCart } from '../context/CartContext';
 import "../styles/ProductCard.css";
 
 const ProductCard = ({ product }) => {
+  const { addToCart } = useCart();
+
   return (
     <motion.div
       className="product-card"
@@ -15,7 +18,12 @@ const ProductCard = ({ product }) => {
         <p className="product-description">{product.description}</p>
         <div className="product-footer">
           <span className="product-price">R${product.price.toFixed(2)}</span>
-          <button className="add-to-cart-button">Adicionar ao Carrinho</button>
+          <button 
+            className="add-to-cart-button" 
+            onClick={() => addToCart(product)}
+          >
+            Adicionar ao Carrinho
+          </button>
         </div>
       </div>
     </motion.div>
